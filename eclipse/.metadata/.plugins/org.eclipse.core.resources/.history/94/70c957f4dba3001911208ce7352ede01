@@ -1,0 +1,69 @@
+package fr.lwjgl3binding.input;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+public class Mouse {
+
+	private static long windowId;
+	private static boolean created = false;
+
+	private static boolean next = false;
+
+	private static int lastEventButtonId;
+	private static int lastEventButtonState;
+
+	private static int currentEventDWheel;
+	
+	private static int x;
+	private static int y;
+
+	public static void init(long windowId) {
+		Mouse.windowId = windowId;
+		created = true;
+	}
+	
+	public static void destroy() {
+		
+	}
+	
+	public static boolean next() {
+
+		if (!next)
+			return next;
+		else
+			next = false;
+		return true;
+	}
+
+	public static int getEventButton() {
+		return lastEventButtonId;
+	}
+
+	public static boolean getEventButtonState() {
+		return lastEventButtonState == GLFW_PRESS;
+	}
+
+	public static int getEventDWheel() {
+		return currentEventDWheel;
+	}
+	
+	public static boolean isCreated() {
+		return created;
+	}
+	
+	public static int getX() {
+		return x;
+	}
+	
+	public static int getY() {
+		return y;
+	}
+	
+	public static int getEventX() {
+		return x;
+	}
+	
+	public static int getEventY() {
+		return y;
+	}
+}

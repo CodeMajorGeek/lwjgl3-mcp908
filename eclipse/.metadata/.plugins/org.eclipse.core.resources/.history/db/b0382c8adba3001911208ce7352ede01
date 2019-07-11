@@ -1,0 +1,21 @@
+package fr.lwjgl3binding.system;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+import java.awt.Desktop;
+import java.net.URI;
+
+public class Sys {
+
+	public static long getTime() {
+		return (long) glfwGetTime();
+	}
+	
+	public static void openURL(String url) {
+		
+		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+		    Desktop.getDesktop().browse(new URI(url));
+		}
+	}
+
+}

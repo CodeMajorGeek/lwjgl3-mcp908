@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.display.DisplayMode"/>
+<fullyQualifiedTypeName name="org.lwjgl.Version"/>
+<fullyQualifiedTypeName name="java.nio.ByteBuffer"/>
+<fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GLUtil"/>
+<fullyQualifiedTypeName name="net.java.games.input.Keyboard"/>
+<fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.system.Sys"/>
+<fullyQualifiedTypeName name="java.awt.Desktop"/>
+<fullyQualifiedTypeName name="java.net.URI"/>
+<fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GLCapabilities"/>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.input.Keyboard"/>
+<fullyQualifiedTypeName name="org.joml.Matrix4f"/>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.input.Mouse"/>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.display.Display"/>
+</qualifiedTypeNameHistroy>

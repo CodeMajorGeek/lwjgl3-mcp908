@@ -1,0 +1,9 @@
+package fr.lwjgl3binding.input;
+
+public class KeyBoard {
+
+	public KeyBoard() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

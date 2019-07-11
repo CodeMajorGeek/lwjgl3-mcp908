@@ -1,0 +1,15 @@
+package fr.lwjgl3binding.system;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+public class Sys {
+
+	public static long getTime() {
+		return (long) glfwGetTime();
+	}
+	
+	public static void openURL(String url) {
+		
+	}
+
+}

@@ -1,0 +1,34 @@
+package fr.lwjgl3binding.input;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+public class KeyBoard {
+	
+	private static long windowId;
+	
+	private static boolean next = false;
+	
+	private static int lastEventKeyId;
+	private static int lastEventKeyState;
+	
+	public static void init(long windowId) {
+		Keyboard.windowId = windowId;
+	}
+	
+	public static boolean next() {
+		
+		if(!next)
+			return next;
+		else
+			next = false;
+		return true;
+	}
+	
+	public static int getEventKey() {
+		return lastEventKeyId;
+	}
+	
+	public static boolean getEventKeyState() {
+		return lastEventKeyState == GLFW_PRESS;
+	}
+}

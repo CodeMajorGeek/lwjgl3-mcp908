@@ -1,0 +1,9 @@
+package fr.lwjgl3binding.display;
+
+public class DisplayMode {
+
+	public DisplayMode() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

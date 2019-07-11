@@ -1,0 +1,10 @@
+package fr.lwjgl3binding.input;
+
+public class Mouse {
+	
+	private static boolean next = false; 
+	
+	public static boolean next() {
+		return next;
+	}
+}

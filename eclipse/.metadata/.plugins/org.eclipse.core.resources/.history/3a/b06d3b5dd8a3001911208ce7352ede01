@@ -1,0 +1,9 @@
+package fr.lwjgl3binding.system;
+
+public class Sys {
+
+	public Sys() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

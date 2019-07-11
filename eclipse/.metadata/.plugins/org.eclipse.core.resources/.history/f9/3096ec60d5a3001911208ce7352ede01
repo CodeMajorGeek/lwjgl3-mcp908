@@ -1,0 +1,16 @@
+package fr.lwjgl3binding.input;
+
+public class Mouse {
+	
+	private static boolean next = false;
+	
+	private static int lastEventButtonId;
+	
+	public static boolean next() {
+		return next;
+	}
+	
+	public static int getEventButton() {
+		return lastEventButtonId;
+	}
+}

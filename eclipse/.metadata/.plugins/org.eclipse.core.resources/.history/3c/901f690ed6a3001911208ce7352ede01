@@ -1,0 +1,11 @@
+package fr.lwjgl3binding.input;
+
+public class KeyBoard {
+	
+	private static long windowId;
+	
+	public static void init(long windowId) {
+		KeyBoard.windowId = windowId;
+	}
+
+}

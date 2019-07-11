@@ -1,0 +1,23 @@
+package fr.lwjgl3binding.input;
+
+import static org.lwjgl.glfw.GLFW.*;
+
+public class Mouse {
+	
+	private static boolean next = false;
+	
+	private static int lastEventButtonId;
+	private static int lastEventButtonState;
+	
+	public static boolean next() {
+		return next;
+	}
+	
+	public static int getEventButton() {
+		return lastEventButtonId;
+	}
+	
+	public static boolean getEventButtonState() {
+		return lastEventButtonState == GLFW_PRESS;
+	}
+}
