@@ -53,6 +53,18 @@ public class DefaultResourcePack implements IResourcePack
         File var2 = (File)this.field_152781_b.get(p_152780_1_.toString());
         return var2 != null && var2.isFile() ? new FileInputStream(var2) : null;
     }
+    
+    public File getFile(ResourceLocation p_152780_1_) throws IOException
+    {
+        File var2 = (File)this.field_152781_b.get(p_152780_1_.toString());
+        return var2 != null && var2.isFile() ? var2 : null;
+    }
+    
+    public String getPath(ResourceLocation p_152780_1_) throws IOException
+    {
+        File var2 = (File)this.field_152781_b.get(p_152780_1_.toString());
+        return var2 != null && var2.isFile() ? var2.getAbsolutePath() : null;
+    }
 
     private InputStream getResourceStream(ResourceLocation p_110605_1_)
     {

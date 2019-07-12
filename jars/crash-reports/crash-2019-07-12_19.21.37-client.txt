@@ -1,0 +1,54 @@
+---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 12/07/19 19:21
+Description: Initializing game
+
+java.lang.RuntimeException: java.io.IOException: Classpath resource not found: icons/icon_16x16.png
+	at net.minecraft.client.Minecraft.getIconBytes(Minecraft.java:655)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:488)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:857)
+	at net.minecraft.client.main.Main.main(Main.java:161)
+	at Start.main(Start.java:11)
+Caused by: java.io.IOException: Classpath resource not found: icons/icon_16x16.png
+	at net.minecraft.client.Minecraft.ioResourceToByteBuffer(Minecraft.java:665)
+	at net.minecraft.client.Minecraft.getIconBytes(Minecraft.java:653)
+	... 4 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.Minecraft.getIconBytes(Minecraft.java:655)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:488)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:857)
+	at net.minecraft.client.main.Main.main(Main.java:161)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_211, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 905365640 bytes (863 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: mcp
+	LWJGL: 3.2.2 build 10
+	OpenGL: GeForce GTX 1050/PCIe/SSE2 GL version 4.6.0 NVIDIA 419.67, NVIDIA Corporation
+	GL Caps: 
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

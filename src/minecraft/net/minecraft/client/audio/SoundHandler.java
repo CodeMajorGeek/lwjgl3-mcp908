@@ -59,7 +59,7 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
 
     public void onResourceManagerReload(IResourceManager p_110549_1_)
     {
-        this.field_147694_f.func_148596_a();
+        this.field_147694_f.reloadSoundSystem();
         this.field_147697_e.func_148763_c();
         Iterator var2 = p_110549_1_.getResourceDomains().iterator();
 
@@ -184,7 +184,7 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
      */
     public void playSound(ISound p_147682_1_)
     {
-        this.field_147694_f.func_148611_c(p_147682_1_);
+        this.field_147694_f.playSound(p_147682_1_);
     }
 
     /**
@@ -192,27 +192,27 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
      */
     public void playDelayedSound(ISound p_147681_1_, int p_147681_2_)
     {
-        this.field_147694_f.func_148599_a(p_147681_1_, p_147681_2_);
+        this.field_147694_f.addDelayedSound(p_147681_1_, p_147681_2_);
     }
 
     public void func_147691_a(EntityPlayer p_147691_1_, float p_147691_2_)
     {
-        this.field_147694_f.func_148615_a(p_147691_1_, p_147691_2_);
+        this.field_147694_f.setListener(p_147691_1_, p_147691_2_);
     }
 
     public void func_147689_b()
     {
-        this.field_147694_f.func_148610_e();
+        this.field_147694_f.pauseAllSounds();
     }
 
     public void func_147690_c()
     {
-        this.field_147694_f.func_148614_c();
+        this.field_147694_f.stopAllSounds();
     }
 
     public void func_147685_d()
     {
-        this.field_147694_f.func_148613_b();
+        this.field_147694_f.unloadSoundSystem();
     }
 
     /**
@@ -220,12 +220,12 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
      */
     public void update()
     {
-        this.field_147694_f.func_148605_d();
+        this.field_147694_f.updateAllSounds();
     }
 
     public void func_147687_e()
     {
-        this.field_147694_f.func_148604_f();
+        this.field_147694_f.resumeAllSounds();
     }
 
     public void setSoundLevel(SoundCategory p_147684_1_, float p_147684_2_)
@@ -235,12 +235,12 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
             this.func_147690_c();
         }
 
-        this.field_147694_f.func_148601_a(p_147684_1_, p_147684_2_);
+        this.field_147694_f.setSoundCategoryVolume(p_147684_1_, p_147684_2_);
     }
 
     public void func_147683_b(ISound p_147683_1_)
     {
-        this.field_147694_f.func_148602_b(p_147683_1_);
+        this.field_147694_f.stopSound(p_147683_1_);
     }
 
     public SoundEventAccessorComposite func_147686_a(SoundCategory ... p_147686_1_)
@@ -271,7 +271,7 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
 
     public boolean func_147692_c(ISound p_147692_1_)
     {
-        return this.field_147694_f.func_148597_a(p_147692_1_);
+        return this.field_147694_f.isSoundPlaying(p_147692_1_);
     }
 
     static final class SwitchType

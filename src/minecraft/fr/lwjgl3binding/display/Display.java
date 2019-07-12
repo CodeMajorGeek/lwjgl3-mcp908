@@ -6,10 +6,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import org.lwjgl.glfw.GLFWImage;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.GLFWWindowPosCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.stb.STBImage;
 
 import fr.lwjgl3binding.input.Keyboard;
 import fr.lwjgl3binding.input.Mouse;
@@ -20,9 +24,13 @@ public class Display {
 
 	private static boolean created = false;
 	private static boolean wasResized = false;
+	private static boolean fullscreen = false;
 
 	private static final IntBuffer WIDTH = memAllocInt(1);
 	private static final IntBuffer HEIGHT = memAllocInt(1);
+	
+	private static final IntBuffer POSITION_X = memAllocInt(1);
+	private static final IntBuffer POSITION_Y = memAllocInt(1);
 
 	public static void create(int width, int height, String title) throws RuntimeException {
 
@@ -43,8 +51,11 @@ public class Display {
 		glfwMakeContextCurrent(windowId);
 		GL.createCapabilities();
 
-		WIDTH.put(width).flip();
-		HEIGHT.put(height).flip();
+		setWidth(width);
+		setHeight(height);
+		
+		setPositionX(0);
+		setPositionY(0);
 
 		GLUtil.setupDebugMessageCallback();
 	}
@@ -74,7 +85,22 @@ public class Display {
 	}
 
 	public static void setFullscreen(boolean fullscreen) {
-
+		
+		if (isFullscreen() == fullscreen)
+			return;
+		
+		final long monitor = glfwGetPrimaryMonitor();
+		
+		if(fullscreen) {
+			
+			final GLFWVidMode vidMode = glfwGetVideoMode(monitor);
+			glfwSetWindowMonitor(windowId, monitor, 0, 0, vidMode.width(), vidMode.height(), 0);
+			
+			Display.fullscreen = true;
+		} else {
+			
+			glfwSetWindowMonitor(windowId, monitor, getPositionX(), getPositionY(), getWidth(), getHeight(), 0);
+		}
 	}
 
 	public static void setResizable(boolean resizable) {
@@ -97,7 +123,28 @@ public class Display {
 	}
 
 	public static void setIcon(ByteBuffer[] iconBuffers) {
+		
+		IntBuffer w = memAllocInt(1);
+		IntBuffer h = memAllocInt(1);
+		IntBuffer comp = memAllocInt(1);
 
+		try (GLFWImage.Buffer icons = GLFWImage.malloc(2)) {
+			ByteBuffer pixels16 = STBImage.stbi_load_from_memory(iconBuffers[0], w, h, comp, 4);
+			icons.position(0).width(w.get(0)).height(h.get(0)).pixels(pixels16);
+
+			ByteBuffer pixels32 = STBImage.stbi_load_from_memory(iconBuffers[1], w, h, comp, 4);
+			icons.position(1).width(w.get(0)).height(h.get(0)).pixels(pixels32);
+
+			icons.position(0);
+			glfwSetWindowIcon(windowId, icons);
+
+			STBImage.stbi_image_free(pixels32);
+			STBImage.stbi_image_free(pixels16);
+		}
+
+		memFree(comp);
+		memFree(h);
+		memFree(w);
 	}
 
 	private static void setWidth(int width) {
@@ -111,24 +158,44 @@ public class Display {
 		HEIGHT.rewind();
 		HEIGHT.put(height).flip();
 	}
+	
+	private static void setPositionX(int x) {
+		
+		POSITION_X.rewind();
+		POSITION_X.put(x).flip();
+	}
 
+	private static void setPositionY(int y) {
+		
+		POSITION_Y.rewind();
+		POSITION_Y.put(y).flip();
+	}
+	
 	public static int getWidth() {
-		return WIDTH.get(1);
+		return WIDTH.get(0);
 	}
 
 	public static int getHeight() {
-		return HEIGHT.get(1);
+		return HEIGHT.get(0);
 	}
 	
-	//TODO: temp fix value
+	public static int getPositionX() {
+		return POSITION_X.get(0);
+	}
+	
+	public static int getPositionY() {
+		return POSITION_Y.get(0);
+	}
+
+	// TODO: temp fix value
 	public static int getFrequency() {
 		return 60;
 	}
-	
+
 	public static GLCapabilities getCapabilities() {
 		return GL.getCapabilities();
 	}
-	
+
 	public static boolean isCreated() {
 		return created;
 	}
@@ -136,7 +203,12 @@ public class Display {
 	public static boolean isCloseRequested() {
 		return glfwWindowShouldClose(windowId);
 	}
-
+	
+	
+	public static boolean isFullscreen() {
+		return fullscreen;
+	}
+	
 	public static boolean wasResized() {
 		return wasResized;
 	}
@@ -146,13 +218,20 @@ public class Display {
 		@Override
 		public void invoke(long window, int width, int height) {
 
-			WIDTH.rewind();
-			WIDTH.put(width).flip();
-
-			HEIGHT.rewind();
-			HEIGHT.put(height).flip();
+			setWidth(width);
+			setHeight(height);
 
 			wasResized = true;
+		}
+	};
+	
+	private static GLFWWindowPosCallback windowPositionCallback = new GLFWWindowPosCallback() {
+
+		@Override
+		public void invoke(long window, int x, int y) {
+			
+			setPositionX(x);
+			setPositionY(y);
 		}
 	};
 }

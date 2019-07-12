@@ -1,4 +1,7 @@
-[17:01:15] [main/INFO]: Setting user: Player0
-[17:01:15] [main/INFO]: (Session ID is token:0:Player0)
-[17:01:16] [Client thread/INFO]: LWJGL Version: 3.2.2 build 10
-[17:01:16] [Client thread/INFO]: Reloading ResourceManager: Default
+[19:53:43] [main/INFO]: Setting user: Player0
+[19:53:43] [main/INFO]: (Session ID is token:0:Player0)
+[19:53:45] [Client thread/INFO]: LWJGL Version: 3.2.2 build 10
+[19:53:45] [Client thread/INFO]: Reloading ResourceManager: Default
+[19:53:46] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[19:53:46] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[19:53:50] [Client thread/INFO]: Stopping!
