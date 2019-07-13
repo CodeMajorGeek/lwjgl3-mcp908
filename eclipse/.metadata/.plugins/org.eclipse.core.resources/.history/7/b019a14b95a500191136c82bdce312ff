@@ -1,0 +1,9 @@
+package net.minecraft.client.audio;
+
+public class ALAudioEvent {
+
+	public ALAudioEvent(int bufferPointer, int sourcePointer) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

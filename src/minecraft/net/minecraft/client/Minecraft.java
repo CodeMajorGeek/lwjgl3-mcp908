@@ -2,12 +2,10 @@ package net.minecraft.client;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Proxy;
 import java.net.SocketAddress;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
@@ -850,6 +848,7 @@ public class Minecraft implements IPlayerUsage {
 		CrashReport var2;
 
 		try {
+			
 			this.startGame();
 		} catch (Throwable var11) {
 			var2 = CrashReport.makeCrashReport(var11, "Initializing game");
@@ -2537,7 +2536,11 @@ public class Minecraft implements IPlayerUsage {
 	public IResourceManager getResourceManager() {
 		return this.mcResourceManager;
 	}
-
+	
+	public DefaultResourcePack getDefaultRessourcePack() {
+		return mcDefaultResourcePack;
+	}
+	
 	public ResourcePackRepository getResourcePackRepository() {
 		return this.mcResourcePackRepository;
 	}

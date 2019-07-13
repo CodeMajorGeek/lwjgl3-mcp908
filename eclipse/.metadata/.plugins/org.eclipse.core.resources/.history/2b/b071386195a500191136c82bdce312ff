@@ -1,0 +1,13 @@
+package net.minecraft.client.audio;
+
+public class ALAudioEvent {
+
+	private int sourcePointer;
+	private int bufferPointer;
+	
+	public ALAudioEvent(int bufferPointer, int sourcePointer) {
+		
+		
+	}
+
+}

@@ -5,7 +5,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.logging.Logger;
 
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowPosCallback;
@@ -14,6 +16,8 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBImage;
+import org.lwjgl.system.Callback;
+import org.lwjgl.system.Configuration;
 
 import fr.lwjgl3binding.input.Keyboard;
 import fr.lwjgl3binding.input.Mouse;
@@ -28,15 +32,18 @@ public class Display {
 
 	private static final IntBuffer WIDTH = memAllocInt(1);
 	private static final IntBuffer HEIGHT = memAllocInt(1);
-	
+
 	private static final IntBuffer POSITION_X = memAllocInt(1);
 	private static final IntBuffer POSITION_Y = memAllocInt(1);
+	
+	private static Callback debugGLProc;
 
 	public static void create(int width, int height, String title) throws RuntimeException {
 
 		if (!glfwInit())
 			throw new RuntimeException("Can't initialize GLFW !");
-
+		
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 		windowId = glfwCreateWindow(width, height, title, NULL, NULL);
 
 		if (windowId == NULL) {
@@ -53,11 +60,14 @@ public class Display {
 
 		setWidth(width);
 		setHeight(height);
-		
+
 		setPositionX(0);
 		setPositionY(0);
-
-		GLUtil.setupDebugMessageCallback();
+		
+		Configuration.DEBUG.set(true);
+		Configuration.DEBUG_LOADER.set(true);
+		Configuration.DEBUG_MEMORY_ALLOCATOR.set(true);
+		debug();
 	}
 
 	public static void destroy() {
@@ -85,20 +95,20 @@ public class Display {
 	}
 
 	public static void setFullscreen(boolean fullscreen) {
-		
+
 		if (isFullscreen() == fullscreen)
 			return;
-		
+
 		final long monitor = glfwGetPrimaryMonitor();
-		
-		if(fullscreen) {
-			
+
+		if (fullscreen) {
+
 			final GLFWVidMode vidMode = glfwGetVideoMode(monitor);
 			glfwSetWindowMonitor(windowId, monitor, 0, 0, vidMode.width(), vidMode.height(), 0);
-			
+
 			Display.fullscreen = true;
 		} else {
-			
+
 			glfwSetWindowMonitor(windowId, monitor, getPositionX(), getPositionY(), getWidth(), getHeight(), 0);
 		}
 	}
@@ -116,14 +126,14 @@ public class Display {
 	}
 
 	public static void setSize(int width, int height) {
-		
+
 		glfwSetWindowSize(windowId, width, height);
 		setWidth(width);
 		setHeight(height);
 	}
 
 	public static void setIcon(ByteBuffer[] iconBuffers) {
-		
+
 		IntBuffer w = memAllocInt(1);
 		IntBuffer h = memAllocInt(1);
 		IntBuffer comp = memAllocInt(1);
@@ -158,19 +168,34 @@ public class Display {
 		HEIGHT.rewind();
 		HEIGHT.put(height).flip();
 	}
-	
+
 	private static void setPositionX(int x) {
-		
+
 		POSITION_X.rewind();
 		POSITION_X.put(x).flip();
 	}
 
 	private static void setPositionY(int y) {
-		
+
 		POSITION_Y.rewind();
 		POSITION_Y.put(y).flip();
 	}
-	
+
+	private static void debug() {
+		
+		
+		
+		glfwSetErrorCallback(new GLFWErrorCallback() {
+
+			@Override
+			public void invoke(int error, long description) {
+
+				Logger.getGlobal().info("GLFW error [" + Integer.toHexString(error) + "]: "
+						+ GLFWErrorCallback.getDescription(description));
+			}
+		});
+	}
+
 	public static int getWidth() {
 		return WIDTH.get(0);
 	}
@@ -178,11 +203,11 @@ public class Display {
 	public static int getHeight() {
 		return HEIGHT.get(0);
 	}
-	
+
 	public static int getPositionX() {
 		return POSITION_X.get(0);
 	}
-	
+
 	public static int getPositionY() {
 		return POSITION_Y.get(0);
 	}
@@ -203,12 +228,11 @@ public class Display {
 	public static boolean isCloseRequested() {
 		return glfwWindowShouldClose(windowId);
 	}
-	
-	
+
 	public static boolean isFullscreen() {
 		return fullscreen;
 	}
-	
+
 	public static boolean wasResized() {
 		return wasResized;
 	}
@@ -224,12 +248,12 @@ public class Display {
 			wasResized = true;
 		}
 	};
-	
+
 	private static GLFWWindowPosCallback windowPositionCallback = new GLFWWindowPosCallback() {
 
 		@Override
 		public void invoke(long window, int x, int y) {
-			
+
 			setPositionX(x);
 			setPositionY(y);
 		}
