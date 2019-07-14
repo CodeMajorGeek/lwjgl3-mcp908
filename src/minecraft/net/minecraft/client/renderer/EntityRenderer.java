@@ -976,7 +976,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
 		if (this.lightmapUpdateNeeded) {
 			this.updateLightmap(p_78480_1_);
 		}
-
+		
 		this.mc.mcProfiler.endSection();
 
 		if (this.mc.gameSettings.pauseOnLostFocus
@@ -1043,7 +1043,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
 						this.theShaderGroup.loadShaderGroup(p_78480_1_);
 						GL11.glPopMatrix();
 					}
-
+					
 					this.mc.getFramebuffer().bindFramebuffer(true);
 				}
 
@@ -1061,14 +1061,13 @@ public class EntityRenderer implements IResourceManagerReloadListener {
 				GL11.glMatrixMode(GL11.GL_PROJECTION);
 				GL11.glLoadIdentity();
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
-				GL11.glLoadIdentity();
 				this.setupOverlayRendering();
 				this.renderEndNanoTime = System.nanoTime();
 			}
 
 			if (this.mc.currentScreen != null) {
 				GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
-
+				
 				try {
 					this.mc.currentScreen.drawScreen(var16, var17, p_78480_1_);
 				} catch (Throwable var12) {

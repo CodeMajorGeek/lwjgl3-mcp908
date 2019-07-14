@@ -13,6 +13,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowPosCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBImage;
@@ -44,6 +45,8 @@ public class Display {
 			throw new RuntimeException("Can't initialize GLFW !");
 		
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 1);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 		windowId = glfwCreateWindow(width, height, title, NULL, NULL);
 
 		if (windowId == NULL) {
@@ -54,7 +57,10 @@ public class Display {
 			created = true;
 
 		glfwSetWindowSizeCallback(windowId, windowSizeCallback);
-
+		
+		Mouse.init(windowId);
+		Keyboard.init(windowId);
+		
 		glfwMakeContextCurrent(windowId);
 		GL.createCapabilities();
 
@@ -64,10 +70,7 @@ public class Display {
 		setPositionX(0);
 		setPositionY(0);
 		
-		Configuration.DEBUG.set(true);
-		Configuration.DEBUG_LOADER.set(true);
-		Configuration.DEBUG_MEMORY_ALLOCATOR.set(true);
-		debug();
+		GLUtil.setupDebugMessageCallback();
 	}
 
 	public static void destroy() {
@@ -89,7 +92,7 @@ public class Display {
 	}
 
 	public static void update() {
-
+		
 		glfwSwapBuffers(windowId);
 		glfwPollEvents();
 	}
@@ -179,21 +182,6 @@ public class Display {
 
 		POSITION_Y.rewind();
 		POSITION_Y.put(y).flip();
-	}
-
-	private static void debug() {
-		
-		
-		
-		glfwSetErrorCallback(new GLFWErrorCallback() {
-
-			@Override
-			public void invoke(int error, long description) {
-
-				Logger.getGlobal().info("GLFW error [" + Integer.toHexString(error) + "]: "
-						+ GLFWErrorCallback.getDescription(description));
-			}
-		});
 	}
 
 	public static int getWidth() {

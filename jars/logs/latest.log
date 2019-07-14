@@ -1,12 +1,23 @@
-[19:56:31] [main/INFO]: Setting user: Player0
-[19:56:31] [main/INFO]: (Session ID is token:0:Player0)
-[19:56:33] [Client thread/INFO]: LWJGL Version: 3.2.2 build 10
-[19:56:33] [Client thread/INFO]: Reloading ResourceManager: Default
-[19:56:33] [Client thread/INFO]: OpenAL initialized !
-[19:56:33] [Client thread/INFO]: SoundSystem created by CodeMajorGeek started !
-[19:56:33] [Client thread/INFO]: OpenAL initialized !
-[19:56:33] [Client thread/INFO]: SoundSystem reloaded !
-[19:56:34] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[19:56:34] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[19:57:49] [Client thread/INFO]: Stopping!
-[19:57:49] [Client thread/INFO]: SoundSystem unloaded !
+[02:06:30] [main/INFO]: Setting user: Player0
+[02:06:30] [main/INFO]: (Session ID is token:0:Player0)
+[02:06:32] [Client thread/INFO]: LWJGL Version: 3.2.2 build 10
+[02:06:32] [Client thread/INFO]: Reloading ResourceManager: Default
+[02:06:32] [Client thread/INFO]: OpenAL initialized !
+[02:06:32] [Client thread/INFO]: SoundSystem created by CodeMajorGeek started !
+[02:06:32] [Client thread/INFO]: OpenAL initialized !
+[02:06:32] [Client thread/INFO]: SoundSystem reloaded !
+[02:06:33] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[02:06:33] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[02:06:38] [Client thread/FATAL]: Reported exception thrown!
+net.minecraft.util.ReportedException: Updating screen events
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1513) ~[bin/:?]
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:925) ~[bin/:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:865) [bin/:?]
+	at net.minecraft.client.main.Main.main(Main.java:161) [bin/:?]
+	at Start.main(Start.java:11) [bin/:?]
+Caused by: java.lang.NullPointerException
+	at fr.lwjgl3binding.input.Keyboard.getEventCharacter(Keyboard.java:56) ~[bin/:?]
+	at net.minecraft.client.gui.GuiScreen.handleKeyboardInput(GuiScreen.java:346) ~[bin/:?]
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:297) ~[bin/:?]
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1502) ~[bin/:?]
+	... 4 more

@@ -1,9 +1,0 @@
-package fr.lwjgl3binding.input;
-
-public class Mouse {
-
-	public Mouse() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

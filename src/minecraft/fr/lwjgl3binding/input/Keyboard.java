@@ -2,6 +2,8 @@ package fr.lwjgl3binding.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import org.lwjgl.glfw.GLFWKeyCallback;
+
 public class Keyboard {
 	
 	private static long windowId;
@@ -11,25 +13,24 @@ public class Keyboard {
 	private static boolean repeatEvents = false;
 	
 	private static int lastEventKeyId;
+	private static int lastEventKeyScancode;
 	private static int lastEventKeyState;
 	
 	public static void init(long windowId) {
 		
 		Keyboard.windowId = windowId;
 		created = true;
+		
+		glfwSetKeyCallback(windowId, keyCallback);
 	}
 	
 	public static void destroy() {
 		
+		keyCallback.free();
 	}
 	
 	public static boolean next() {
-		
-		if(!next)
-			return next;
-		else
-			next = false;
-		return true;
+		return next;
 	}
 	
 	public static void enableRepeatEvents(boolean repeatEvents) {
@@ -37,21 +38,21 @@ public class Keyboard {
 	}
 	
 	public static int getEventKey() {
+		next = false;
 		return lastEventKeyId;
 	}
 	
-	//TODO: temp fix char
 	public static String getKeyName(int keyId) {
-		return "z";
+		return glfwGetKeyName(keyId, 0);
 	}
 	
 	public static boolean getEventKeyState() {
+		next = false;
 		return lastEventKeyState == GLFW_PRESS;
 	}
 	
-	//TODO: temp fix char
 	public static char getEventCharacter() {
-		return 'z';
+		return glfwGetKeyName(lastEventKeyId, lastEventKeyScancode).charAt(0);
 	}
 	
 	public static boolean isKeyDown(int keyId) {
@@ -65,4 +66,17 @@ public class Keyboard {
 	public static boolean isCreated() {
 		return created;
 	}
+	
+	private static GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
+
+		@Override
+		public void invoke(long window, int key, int scancode, int action, int mods) {
+			
+			lastEventKeyId = key;
+			lastEventKeyScancode = scancode;
+			lastEventKeyState = action;
+			
+			next = true;
+		}
+	};
 }

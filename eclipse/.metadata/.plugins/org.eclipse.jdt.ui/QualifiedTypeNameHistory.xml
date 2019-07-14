@@ -15,16 +15,13 @@
 <fullyQualifiedTypeName name="fr.lwjgl3binding.input.Keyboard"/>
 <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
 <fullyQualifiedTypeName name="fr.lwjgl3binding.input.Mouse"/>
-<fullyQualifiedTypeName name="fr.lwjgl3binding.display.Display"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="org.lwjgl.system.Configuration"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWErrorCallback"/>
 <fullyQualifiedTypeName name="org.lwjgl.system.Callback"/>
-<fullyQualifiedTypeName name="org.lwjgl.openal.AL11"/>
 <fullyQualifiedTypeName name="org.lwjgl.openal.ALC11"/>
 <fullyQualifiedTypeName name="org.lwjgl.openal.ALC"/>
 <fullyQualifiedTypeName name="org.lwjgl.openal.AL"/>
-<fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
 <fullyQualifiedTypeName name="java.nio.IntBuffer"/>
 <fullyQualifiedTypeName name="org.lwjgl.stb.STBVorbis"/>
 <fullyQualifiedTypeName name="java.nio.ShortBuffer"/>
@@ -42,4 +39,10 @@
 <fullyQualifiedTypeName name="java.util.logging.LogManager"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.Logger"/>
 <fullyQualifiedTypeName name="org.apache.logging.log4j.LogManager"/>
+<fullyQualifiedTypeName name="org.lwjgl.openal.AL11"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWWindowSizeCallback"/>
+<fullyQualifiedTypeName name="fr.lwjgl3binding.display.Display"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFWMouseButtonCallback"/>
 </qualifiedTypeNameHistroy>

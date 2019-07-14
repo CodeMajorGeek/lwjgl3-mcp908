@@ -722,7 +722,7 @@ public class Minecraft implements IPlayerUsage {
 		} catch (IOException var7) {
 			logger.error("Unable to load logo: " + locationMojangPng, var7);
 		}
-
+		
 		Tessellator var4 = Tessellator.instance;
 		var4.startDrawingQuads();
 		var4.setColorOpaque_I(16777215);
@@ -731,7 +731,7 @@ public class Minecraft implements IPlayerUsage {
 		var4.addVertexWithUV((double) this.displayWidth, 0.0D, 0.0D, 0.0D, 0.0D);
 		var4.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
 		var4.draw();
-
+		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		var4.setColorOpaque_I(16777215);
 		short var5 = 256;
@@ -924,7 +924,7 @@ public class Minecraft implements IPlayerUsage {
 		for (int var3 = 0; var3 < this.timer.elapsedTicks; ++var3) {
 			this.runTick();
 		}
-
+		
 		this.mcProfiler.endStartSection("preRenderErrors");
 		long var6 = System.nanoTime() - var5;
 		RenderBlocks.fancyGrass = this.gameSettings.fancyGraphics;
@@ -949,14 +949,14 @@ public class Minecraft implements IPlayerUsage {
 			this.entityRenderer.updateCameraAndRender(this.timer.renderPartialTicks);
 			this.mcProfiler.endSection();
 		}
-
+		
 		GL11.glFlush();
 		this.mcProfiler.endSection();
-
+		
 		if (this.fullscreen) {
 			this.toggleFullscreen();
 		}
-
+		
 		if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart) {
 			if (!this.mcProfiler.profilingEnabled) {
 				this.mcProfiler.clearProfiling();
@@ -968,7 +968,7 @@ public class Minecraft implements IPlayerUsage {
 			this.mcProfiler.profilingEnabled = false;
 			this.prevFrameTime = System.nanoTime();
 		}
-
+		
 		this.guiAchievement.func_146254_a();
 		this.mcFramebuffer.unbindFramebuffer();
 		GL11.glPopMatrix();
